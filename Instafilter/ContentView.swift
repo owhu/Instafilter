@@ -53,7 +53,7 @@ struct ContentView: View {
                 if currentFilter.inputKeys.contains(kCIInputRadiusKey) {
                     HStack {
                         Text("Radius")
-                        Slider(value: $filterRadius)
+                        Slider(value: $filterRadius, in: 0...200)
                             .onChange(of: filterRadius, applyProcessing)
                             .disabled(processedImage == nil)
                     }
@@ -63,7 +63,7 @@ struct ContentView: View {
                 if currentFilter.inputKeys.contains(kCIInputScaleKey) {
                     HStack {
                         Text("Scale")
-                        Slider(value: $filterScale)
+                        Slider(value: $filterScale, in: 0...10)
                             .onChange(of: filterScale, applyProcessing)
                             .disabled(processedImage == nil)
                     }
