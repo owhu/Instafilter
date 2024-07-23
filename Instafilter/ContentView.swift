@@ -47,7 +47,7 @@ struct ContentView: View {
                             .onChange(of: filterIntensity, applyProcessing)
                             .disabled(processedImage == nil)
                     }
-                    padding(.vertical)
+                    
                 }
                 
                 if currentFilter.inputKeys.contains(kCIInputRadiusKey) {
@@ -57,7 +57,6 @@ struct ContentView: View {
                             .onChange(of: filterRadius, applyProcessing)
                             .disabled(processedImage == nil)
                     }
-                    padding(.vertical)
                 }
                 
                 if currentFilter.inputKeys.contains(kCIInputScaleKey) {
@@ -67,7 +66,7 @@ struct ContentView: View {
                             .onChange(of: filterScale, applyProcessing)
                             .disabled(processedImage == nil)
                     }
-                    padding(.vertical)
+                    
                 }
                 
             
@@ -96,7 +95,7 @@ struct ContentView: View {
                 Button("Vignette") { setFilter(CIFilter.vignette()) }
                 Button("BokehBlur") { setFilter(CIFilter.bokehBlur()) }
                 Button("Monochrome") { setFilter(CIFilter.colorMonochrome()) }
-                Button("Kaleidoscope") { setFilter(CIFilter.kaleidoscope()) }
+                Button("Bloom") { setFilter(CIFilter.bloom()) }
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -133,8 +132,8 @@ struct ContentView: View {
         let inputKeys = currentFilter.inputKeys
 
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey) }
-        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterScale * 10, forKey: kCIInputScaleKey) }
+        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterRadius, forKey: kCIInputRadiusKey) }
+        if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterScale, forKey: kCIInputScaleKey) }
 
         guard let outputImage = currentFilter.outputImage else { return }
         guard let cgImage = context.createCGImage(outputImage, from: outputImage.extent) else { return }
